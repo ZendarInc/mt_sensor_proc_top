@@ -57,9 +57,9 @@ public:
     assert(!writing);
     writing = true;
     if (content[write_ptr].status == SlotStatus::BUSY) {
-      write_ptr = (write_ptr - 1) % SLOT_COUNT;
+      write_ptr = (write_ptr + SLOT_COUNT - 1) % SLOT_COUNT;
     }
-    // we	should have a writable slot
+    // we should have a writable slot now
     assert(content[write_ptr].status != SlotStatus::BUSY);
     content[write_ptr].status = SlotStatus::BUSY;
     return content[write_ptr].data_ptr;
